@@ -48,7 +48,7 @@ const Hero = () => {
           
           {/* Flip Words Container */}
           
-          <div className="text-center text-4xl md:text-6xl lg:text-7xl font-bold mb-8">
+          <div className="text-center text-3xl md:text-6xl lg:text-7xl  font-bold mb-8">
             <FlipWords
               words={words} 
               className="text-center text-blue-500  "

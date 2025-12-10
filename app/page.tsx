@@ -28,20 +28,25 @@ export default function Home() {
 
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      {/* Resizable Navbar */}
+      
       <Navbar className="top-4">
-        {/* Desktop nav */}
+        {/* Desktop Navigation */}
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} />
 
           <div className="hidden lg:flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
+            <NavbarButton href="/login" variant="secondary">
+              Login
+            </NavbarButton>
+
+            <NavbarButton href="/book-call" variant="primary">
+              Book a call
+            </NavbarButton>
           </div>
         </NavBody>
 
-        {/* Mobile nav */}
+        {/* Mobile Navigation */}
         <MobileNav>
           <MobileNavHeader>
             <NavbarLogo />
@@ -68,14 +73,15 @@ export default function Home() {
 
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="/login"
                 variant="primary"
                 className="w-full"
               >
                 Login
               </NavbarButton>
+
               <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
+                href="/book-call"
                 variant="primary"
                 className="w-full"
               >
@@ -86,7 +92,6 @@ export default function Home() {
         </MobileNav>
       </Navbar>
 
-      
       <div className="max-w-7xl w-full">
         <Hero />
         <Grid />
@@ -94,4 +99,3 @@ export default function Home() {
     </main>
   );
 }
-

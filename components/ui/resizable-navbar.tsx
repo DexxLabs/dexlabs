@@ -11,6 +11,10 @@ import {
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 
+/* -------------------------------------------------------------------------- */
+/*                                   TYPES                                    */
+/* -------------------------------------------------------------------------- */
+
 interface NavbarProps {
   children: React.ReactNode;
   className?: string;
@@ -37,19 +41,24 @@ interface MobileNavProps {
 interface MobileNavHeaderProps {
   children: React.ReactNode;
   className?: string;
+  
 }
 
 interface MobileNavMenuProps {
   children: React.ReactNode;
   className?: string;
   isOpen: boolean;
+  onClose?: () => void;
 }
 
-
+/* -------------------------------------------------------------------------- */
+/*                                   NAVBAR                                   */
+/* -------------------------------------------------------------------------- */
 
 export const Navbar = ({ children, className }: NavbarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll({ target: ref });
+
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -64,7 +73,6 @@ export const Navbar = ({ children, className }: NavbarProps) => {
       {React.Children.map(children, (child) => {
         if (!React.isValidElement(child)) return child;
 
-        
         return React.cloneElement(child as React.ReactElement<any>, {
           visible,
         });
@@ -73,7 +81,9 @@ export const Navbar = ({ children, className }: NavbarProps) => {
   );
 };
 
-
+/* -------------------------------------------------------------------------- */
+/*                                  NAV BODY                                  */
+/* -------------------------------------------------------------------------- */
 
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
@@ -99,6 +109,9 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   );
 };
 
+/* -------------------------------------------------------------------------- */
+/*                                 NAV ITEMS                                  */
+/* -------------------------------------------------------------------------- */
 
 export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   const [hovered, setHovered] = useState<number | null>(null);
@@ -132,6 +145,9 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   );
 };
 
+/* -------------------------------------------------------------------------- */
+/*                               MOBILE NAV ROOT                              */
+/* -------------------------------------------------------------------------- */
 
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => (
   <motion.div
@@ -151,6 +167,9 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => (
   </motion.div>
 );
 
+/* -------------------------------------------------------------------------- */
+/*                                MOBILE HEADER                               */
+/* -------------------------------------------------------------------------- */
 
 export const MobileNavHeader = ({
   children,
@@ -161,6 +180,9 @@ export const MobileNavHeader = ({
   </div>
 );
 
+/* -------------------------------------------------------------------------- */
+/*                               MOBILE NAV MENU                               */
+/* -------------------------------------------------------------------------- */
 
 export const MobileNavMenu = ({
   children,
@@ -184,7 +206,9 @@ export const MobileNavMenu = ({
   </AnimatePresence>
 );
 
-
+/* -------------------------------------------------------------------------- */
+/*                                  TOGGLE                                    */
+/* -------------------------------------------------------------------------- */
 
 export const MobileNavToggle = ({
   isOpen,
@@ -199,6 +223,10 @@ export const MobileNavToggle = ({
     <IconMenu2 className="text-black dark:text-white" onClick={onClick} />
   );
 
+/* -------------------------------------------------------------------------- */
+/*                                   LOGO                                     */
+/* -------------------------------------------------------------------------- */
+
 export const NavbarLogo = () => (
   <a href="/" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1">
     <Image src="/dexlab.png" alt="DexLabs logo" width={32} height={32} />
@@ -206,6 +234,9 @@ export const NavbarLogo = () => (
   </a>
 );
 
+/* -------------------------------------------------------------------------- */
+/*                              SIMPLE <a> BUTTON                              */
+/* -------------------------------------------------------------------------- */
 
 type NavbarButtonProps = {
   href: string;
@@ -224,9 +255,8 @@ export const NavbarButton = ({
     "px-4 py-2 rounded-md text-sm font-bold inline-block text-center hover:-translate-y-0.5 transition";
 
   const variants = {
-    primary:
-      "bg-white text-black shadow-[0_0_24px_rgba(34,42,53,0.06)]",
-    secondary: "bg-transparent text-white shadow-none",
+    primary: "bg-white text-black shadow",
+    secondary: "bg-transparent text-white",
     dark: "bg-black text-white shadow-md",
     gradient: "bg-gradient-to-b from-blue-500 to-blue-700 text-white",
   };
