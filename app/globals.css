@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
+*{
+  cursor:hidden;
+}
 
 @theme {
   /* base colors */
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(240 10% 3.9%);
+  --color-main-blue: #7C3AED;
 
   /* card */
   --color-card: hsl(0 0% 100%);

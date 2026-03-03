@@ -1,6 +1,7 @@
 import React from "react";
 import { LogoTicker } from "./LogoTicker";
 import { MarketingSolutions } from "./MarketingSolutions";
+import { GlideUpSpan } from "./ui/Glideupspan";
 
 const Hero = () => {
   return (
@@ -20,6 +21,12 @@ const Hero = () => {
           <span className="block lg:whitespace-nowrap">
             that turn passive scrollers into paying customers
           </span>
+          {/* <GlideUpSpan delay={0}>
+            We build data-driven content systems
+          </GlideUpSpan>
+          <GlideUpSpan delay={0.2}>
+          that turn passive scrollers into paying customers
+          </GlideUpSpan> */}
         </h1>
 
         {/* Subheading */}
@@ -27,7 +34,9 @@ const Hero = () => {
           className="mt-4 text-sm text-gray-400 font-light tracking-wide 
               lg:whitespace-nowrap lg:max-w-none max-w-md"
         >
+          <span>
           Through viral content strategy, optimized ads, and conversion funnels
+          </span>
         </p>
 
         {/* CTA Buttons */}

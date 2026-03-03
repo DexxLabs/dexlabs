@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
 import ClientLayout from "@/components/ClientLayout";
-
+import SquishyCursor from "@/components/ui/SquishyCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +38,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <ClientLayout>
+              <SquishyCursor/>
               {children}
             </ClientLayout>
           </ThemeProvider>

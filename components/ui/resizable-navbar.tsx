@@ -202,8 +202,8 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => (
   <a href="/" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1">
-    <Image src="/dexlab.png" alt="DexLabs logo" width={64} height={64} />
-    <span className="font-medium text-black dark:text-white">DexLabs</span>
+    <Image src="/dexlab.png" alt="DexLabs logo" width={54} height={54} />
+    <span className="font-medium text-black dark:text-white">Dexlabs</span>
   </a>
 );
 

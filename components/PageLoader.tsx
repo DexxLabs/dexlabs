@@ -1,26 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
-
 const BRAND_NAME = "dexlabs";
-const BRAND_DOT_COLOR = "#F5C518"; 
+const BRAND_DOT_COLOR = "#F5C518";
 const LOADER_BG = "#0a0a0a";
 const LOADER_TEXT_COLOR = "#ffffff";
-const CHAR_STAGGER = 0.06;   
-const HOLD_DURATION = 600;   
-
+const CHAR_STAGGER = 0.06;
+const HOLD_DURATION = 600;
 
 interface PageLoaderProps {
- 
   onComplete?: () => void;
 }
 
-
 const chars = BRAND_NAME.split("");
 
-// Framer Motion variants
+/* ---------------- Overlay Animation ---------------- */
+
 const overlayVariants: Variants = {
   visible: { y: "0%" },
   exit: {
@@ -28,19 +25,20 @@ const overlayVariants: Variants = {
     transition: {
       duration: 0.9,
       ease: [0.76, 0, 0.24, 1],
-      delay: 0.1,
     },
   },
 };
 
+/* ---------------- Letter Animation ---------------- */
+
 const charVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 40 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: i * CHAR_STAGGER,
-      duration: 0.4,
+      duration: 0.45,
       ease: [0.33, 1, 0.68, 1],
     },
   }),
@@ -60,8 +58,8 @@ const dotVariants: Variants = {
       delay: i * CHAR_STAGGER + 0.1,
       duration: 0.35,
       type: "spring",
-      stiffness: 300,
-      damping: 20,
+      stiffness: 280,
+      damping: 18,
     },
   }),
   exit: {
@@ -71,7 +69,8 @@ const dotVariants: Variants = {
   },
 };
 
-// Page content slide-up variants
+/* ---------------- Page Content Animation ---------------- */
+
 export const pageVariants: Variants = {
   hidden: { y: "6%", opacity: 0 },
   visible: {
@@ -80,26 +79,15 @@ export const pageVariants: Variants = {
     transition: {
       duration: 0.8,
       ease: [0.33, 1, 0.68, 1],
-      delay: 0.15,
     },
   },
 };
 
+/* ---------------- Loader Component ---------------- */
+
 export default function PageLoader({ onComplete }: PageLoaderProps) {
   const [isExiting, setIsExiting] = useState(false);
   const [isDone, setIsDone] = useState(false);
-
-  // Total time for all letters to appear
-  const totalTypeDuration =
-    chars.length * CHAR_STAGGER * 1000 + 400 + HOLD_DURATION;
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsExiting(true);
-    }, totalTypeDuration);
-
-    return () => clearTimeout(timer);
-  }, [totalTypeDuration]);
 
   const handleExitComplete = () => {
     setIsDone(true);
@@ -125,9 +113,9 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
             justifyContent: "center",
             zIndex: 9999,
             overflow: "hidden",
+            willChange: "transform",
           }}
         >
-          {/* Brand name */}
           <motion.div
             style={{
               display: "flex",
@@ -148,13 +136,19 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
+                onAnimationComplete={() => {
+                  if (i === chars.length - 1) {
+                    setTimeout(() => {
+                      setIsExiting(true);
+                    }, HOLD_DURATION);
+                  }
+                }}
                 style={{ display: "inline-block" }}
               >
                 {char}
               </motion.span>
             ))}
 
-            {/* Accent dot */}
             <motion.span
               custom={chars.length}
               variants={dotVariants}
@@ -164,7 +158,7 @@ export default function PageLoader({ onComplete }: PageLoaderProps) {
               style={{
                 display: "inline-block",
                 color: BRAND_DOT_COLOR,
-                marginLeft: "1px",
+                marginLeft: "2px",
               }}
             >
               .
