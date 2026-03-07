@@ -1,86 +1,81 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  MdDesignServices,
-  MdVideoLibrary,
-  MdCameraAlt,
-  MdManageAccounts,
-} from "react-icons/md";
-import { PiPencilLineBold } from "react-icons/pi";
 
-const services = [
-  {
-    id: 1,
-    label: "Design",
-    icon: MdDesignServices,
-    style: { left: "50%", top: "8%" },
-    delay: 0.1,
-  },
-  {
-    id: 2,
-    label: "Video Editing",
-    icon: MdVideoLibrary,
-    style: { left: "33%", top: "33%" },
-    delay: 0.2,
-  },
-  {
-    id: 3,
-    label: "Script Writing",
-    icon: PiPencilLineBold,
-    style: { left: "63%", top: "33%" },
-    delay: 0.3,
-  },
-  {
-    id: 4,
-    label: "Social Media Management",
-    icon: MdManageAccounts,
-    style: { left: "33%", top: "58%" },
-    delay: 0.4,
-  },
-  {
-    id: 5,
-    label: "Photography",
-    icon: MdCameraAlt,
-    style: { left: "63%", top: "58%" },
-    delay: 0.5,
-  },
-  {
-    id: 6,
-    label: "Design",
-    icon: MdDesignServices,
-    style: { left: "50%", top: "80%" },
-    delay: 0.6,
-  },
-];
+export default function MarketingSolutions() {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 18 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: [0.33, 1, 0.68, 1], delay },
-  }),
-};
+  const nodes = {
+    center: { x: 450, y: 400 },
+    p1: { x: 255, y: 200 },
+    p2: { x: 660, y: 200 },
+    p3: { x: 450, y: 630 },
+  };
 
-export const MarketingSolutions = () => {
+  const services = [
+    { x: 68, y: 120, icon: "/logo-identity.png", label: "Logo & Identity" },
+    { x: 68, y: 250, icon: "/ui-ux-design.png", label: "UI/UX Design" },
+    { x: 68, y: 380, icon: "/design-system.png", label: "Design System" },
+
+    { x: 832, y: 120, icon: "/marketing-website.png", label: "Marketing Website" },
+    { x: 832, y: 250, icon: "/web-apps.png", label: "Web Apps" },
+    { x: 832, y: 380, icon: "/mobile-apps.png", label: "Mobile Apps" },
+    { x: 832, y: 510, icon: "/seo.png", label: "SEO" },
+
+    { x: 150, y: 793, icon: "/video-scripts.png", label: "Video Scripts" },
+    { x: 300, y: 793, icon: "/video-production.png", label: "Video Production" },
+    { x: 450, y: 793, icon: "/photography.png", label: "Photography" },
+    { x: 600, y: 793, icon: "/social-media.png", label: "Social Media" },
+    { x: 750, y: 793, icon: "/paid-ads.png", label: "Paid Ads" },
+  ];
+
+  function makePath(x1: number, y1: number, x2: number, y2: number) {
+    const mx = (x1 + x2) / 2;
+    return `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`;
+  }
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    svg.innerHTML = "";
+
+    const center = nodes.center;
+
+    const pillars = [nodes.p1, nodes.p2, nodes.p3];
+
+    pillars.forEach((p) => {
+      const path = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "path"
+      );
+
+      path.setAttribute("d", makePath(center.x, center.y, p.x, p.y));
+      path.setAttribute("stroke", "#9c05ed");
+      path.setAttribute("stroke-width", "1.5");
+      path.setAttribute("fill", "none");
+      path.setAttribute("stroke-opacity", "0.65");
+
+      svg.appendChild(path);
+    });
+  }, []);
+
   return (
-    // No bg, no grid, no glow — all of that is global in page.tsx
-    <section className="relative w-full " style={{ minHeight: "480px" }}>
-      <div className="relative z-10 flex w-full h-full min-h-[480px]">
+    <section className="relative w-full">
+      <div className="flex w-full">
 
-        {/* LEFT: text content — same left indent as Hero */}
+        {/* LEFT CONTENT */}
         <div
-          className="flex flex-col justify-center shrink-0 pl-[18vw] pr-6 py-16"
+          className="flex flex-col justify-center shrink-0 pl-[18vw] pr-6 py-20"
           style={{ width: "42%" }}
         >
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-[0.6rem] font-bold tracking-[0.22em] uppercase mb-3"
-            style={{ color: "#9b5de5" }}
+            className="text-[0.6rem] font-bold tracking-[0.22em] uppercase mb-3 text-purple-400"
           >
             Our Systems. Your Growth
           </motion.p>
@@ -89,70 +84,114 @@ export const MarketingSolutions = () => {
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            className="text-white font-extrabold leading-[1.1] tracking-tight"
+            className="text-white font-extrabold leading-[1.1]"
             style={{ fontSize: "clamp(1.7rem, 2.8vw, 2.6rem)" }}
           >
-            Marketing Solutions
+            Everything Your
             <br />
-            for all business
+            Brand Needs
           </motion.h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-7"
-          >
-            <button className="h-9 px-5 border border-white bg-transparent text-white text-[0.58rem] font-bold tracking-[0.16em] uppercase transition-all duration-200 hover:bg-white hover:text-[#080714]">
+          <div className="mt-7">
+            <button className="h-9 px-5 border border-white bg-transparent text-white text-[0.58rem] font-bold tracking-[0.16em] uppercase hover:bg-white hover:text-black transition">
               Our Brand Solutions
             </button>
-          </motion.div>
+          </div>
         </div>
 
-        {/* RIGHT: scattered service pills */}
-        <div className="relative flex-1" style={{ minHeight: "480px" }}>
-          {services.map((svc) => {
-            const Icon = svc.icon;
-            return (
-              <motion.div
-                key={svc.id}
-                custom={svc.delay}
-                // variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="absolute"
-                style={svc.style}
-              >
-                <ServicePill icon={<Icon size={14} />} label={svc.label} />
-              </motion.div>
-            );
-          })}
+        {/* RIGHT MINDMAP */}
+        <div className="relative flex-1 flex items-center justify-center">
+          <div
+            ref={canvasRef}
+            className="relative w-[900px] h-[900px]"
+          >
+
+            {/* SVG CONNECTORS */}
+            <svg
+              ref={svgRef}
+              className="absolute inset-0 w-full h-full pointer-events-none"
+            />
+
+            {/* CENTER */}
+            <Node x={nodes.center.x} y={nodes.center.y}>
+              <div className="w-[90px] h-[90px] rounded-xl border border-purple-500 bg-linear-to-br from-[#1e0535] to-[#2a0860] flex items-center justify-center shadow-[0_0_40px_rgba(156,5,237,0.4)]">
+                <img src="/Logo_White-PNG.png" className="w-[54px]" />
+              </div>
+            </Node>
+
+            {/* PILLARS */}
+            <Node x={nodes.p1.x} y={nodes.p1.y}>
+              <Pillar title="Brand & Identity" desc="Look premium everywhere." />
+            </Node>
+
+            <Node x={nodes.p2.x} y={nodes.p2.y}>
+              <Pillar title="Websites & Apps" desc="Build digital products." />
+            </Node>
+
+            <Node x={nodes.p3.x} y={nodes.p3.y}>
+              <Pillar title="Content & Growth" desc="Turn views into revenue." />
+            </Node>
+
+            {/* SERVICES */}
+            {services.map((svc, i) => (
+              <Node key={i} x={svc.x} y={svc.y}>
+                <Service icon={svc.icon} label={svc.label} />
+              </Node>
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
-function ServicePill({
+function Node({
+  x,
+  y,
+  children,
+}: {
+  x: number;
+  y: number;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className="absolute -translate-x-1/2 -translate-y-1/2"
+      style={{ left: x, top: y }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function Pillar({
+  title,
+  desc,
+}: {
+  title: string;
+  desc: string;
+}) {
+  return (
+    <div className="w-[148px] h-[100px] bg-[#180630] border border-purple-500/40 rounded-xl p-3 hover:scale-105 transition">
+      <div className="text-purple-300 font-bold text-sm">{title}</div>
+      <div className="text-white/50 text-xs mt-1">{desc}</div>
+    </div>
+  );
+}
+
+function Service({
   icon,
   label,
 }: {
-  icon: React.ReactNode;
+  icon: string;
   label: string;
 }) {
   return (
-    <div className="group flex items-center gap-2 px-3 py-[7px] rounded-full border border-white/15 bg-white/4 backdrop-blur-sm cursor-default transition-all duration-300 hover:border-purple-500/60 hover:bg-purple-500/10 whitespace-nowrap">
-      <span className="flex items-center justify-center w-5 h-5 rounded border border-white/20 bg-white/5 text-white/70 group-hover:border-purple-400/60 group-hover:text-purple-300 transition-colors duration-300 shrink-0">
-        {icon}
-      </span>
-      <span className="text-[0.7rem] font-medium text-white/70 tracking-wide group-hover:text-white/90 transition-colors duration-300">
+    <div className="w-[100px] h-[100px] bg-white/3 border border-white/10 rounded-xl flex flex-col items-center justify-center gap-2 hover:bg-purple-500/10 hover:border-purple-500/50 transition hover:scale-110">
+      <img src={icon} className="w-[36px]" />
+      <span className="text-[11px] text-white/80 text-center px-2">
         {label}
       </span>
     </div>
   );
 }
-
-export default MarketingSolutions;

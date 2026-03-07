@@ -134,7 +134,7 @@ export default function Home() {
         <Hero />
         </div>
         
-        <div className="max-w-7xl w-full mx-auto px-5 sm:px-10">
+        <div className="max-w-7xl w-full mx-auto  my-30 px-5 sm:px-10">
           <Grid />
         </div>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { LogoTicker } from "./LogoTicker";
-import { MarketingSolutions } from "./MarketingSolutions";
+import MarketingSolutions from "./MarketingSolutions";
 import { GlideUpSpan } from "./ui/Glideupspan";
 
 const Hero = () => {
