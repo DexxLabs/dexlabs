@@ -42,7 +42,7 @@ const SERVICE_DATA = [
     side: "right",
   },
   {
-    x: 832, y: 510, icon: "/seo.png", label: "SEO",
+    x: 832, y: 510, icon: "/SEO.png", label: "SEO",
     problem: "Invisible on Google, missing free traffic.",
     solution: "Rank for keywords that bring buying intent.",
     side: "right",
