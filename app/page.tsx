@@ -16,6 +16,11 @@ import { useState } from "react";
 import Hero from "@/components/Hero";
 import Grid from "@/components/Grid";
 import { CallToAction } from "@/components/CallToAction";
+import MeshGradientBackground from "@/components/Background/MeshGradientBackground";
+import LavaBackground from "@/components/Background/LavaBackground";
+import BlobBackground from "@/components/Background/BlobBackground";
+import GridBackground from "@/components/Background/GridBackgroundGlowing";
+import ShimmerGrid from "@/components/Background/ShimmerGrid";
 
 export default function Home() {
   const navItems = [
@@ -30,56 +35,7 @@ export default function Home() {
   return (
     <main className="relative w-full overflow-x-hidden bg-[#080714]">
 
-     {/* Global background Layer */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }}>
-
-        {/* Fine grid lines */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)
-            `,
-            backgroundSize: "60px 60px",
-          }}
-        />
-
-        {/* Glow 1 — top-left */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            background: `radial-gradient(ellipse 35% 30% at 0% 10%, rgba(100,40,200,0.55) 0%, rgba(60,20,130,0.25) 45%, transparent 75%)`,
-          }}
-        />
-
-        {/* Glow 2 — top-right */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            background: `radial-gradient(ellipse 35% 30% at 100% 50%, rgba(100,40,200,0.55) 0%, rgba(60,20,130,0.25) 45%, transparent 75%)`,
-          }}
-        />
-
-        {/* Glow 3 — mid-left */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            background: `radial-gradient(ellipse 35% 30% at 0% 100%, rgba(100,40,200,0.55) 0%, rgba(60,20,130,0.25) 45%, transparent 75%)`,
-          }}
-        />
-
-       
-
-        {/* Vignette — keeps edges dark so glows feel focused */}
-        <div
-          className="absolute inset-0 w-full h-full"
-          style={{
-            background: `radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(5,4,18,0.7) 100%)`,
-          }}
-        />
-      </div>
-      
+    <BlobBackground/>
 
 
       
