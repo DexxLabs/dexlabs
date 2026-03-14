@@ -16,7 +16,7 @@ interface Reel {
 const REELS: Reel[] = [
   {
     id: 1,
-    src: "/reels/showreel.mp4",
+    src: "/reels/showreel-optimized.mp4",
     thumbnail: "https://tenor.com/view/connecting-loading-buffering-load-gif-17415275",
     label: "Brand Launch",
     metric: "2.4M views",
@@ -24,7 +24,7 @@ const REELS: Reel[] = [
   },
   {
     id: 2,
-    src: "/reels/showreel-2.mp4",
+    src: "/reels/showreel-2-optimized.mp4",
     thumbnail: "https://tenor.com/view/connecting-loading-buffering-load-gif-17415275",
     label: "Growth Campaign",
     metric: "+320% reach",
@@ -32,7 +32,7 @@ const REELS: Reel[] = [
   },
   {
     id: 3,
-    src: "/reels/showreel-3.mp4",
+    src: "/reels/showreel-3-optimized.mp4",
     thumbnail: "https://tenor.com/view/connecting-loading-buffering-load-gif-17415275",
     label: "Viral Content",
     metric: "18K shares",
@@ -40,7 +40,7 @@ const REELS: Reel[] = [
   },
   {
     id: 4,
-    src: "/reels/showreel-4.mp4",
+    src: "/reels/showreel-4-optimized.mp4",
     thumbnail: "https://tenor.com/view/connecting-loading-buffering-load-gif-17415275",
     label: "Product Drop",
     metric: "4.1M impressions",
